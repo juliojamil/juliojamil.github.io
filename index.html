@@ -71,8 +71,9 @@
     </script>
     <style>
         html {
-            inline-size: 100dvw;
-            block-size: 100dvh;
+            inline-size: 100%;
+            block-size: 100%;
+
             @supports (inline-size: 100dvw) {
                 inline-size: 100dvw;
             }
@@ -89,20 +90,26 @@
         }
 
         html, body {
-            background-color: #1a1a1aff
+            background-color: #1a1a1aff;
+            min-inline-size: fit-content;
         }
 
         body {
             display: block;
+            position: relative;
+            padding-inline: 1rem;
         }
 
         body, .root-container {
             inline-size: 100%;
             block-size: 100%;
+            overflow: auto;
         }
 
         .root-container {
             display: grid;
+            min-inline-size: 21.875rem;
+            grid-template-rows: [r1] auto [r2] auto [rend];
             grid-template-columns: [c1] 8.384rem [c2] auto [cend];
             font-family: monospace;
             font-size: 1rem;
@@ -119,8 +126,24 @@
             text-decoration: none;
         }
 
+        .twitch {
+            display: block;
+            grid-row: r2 / rend;
+            grid-column: c1 / cend;
+            inline-size: 100%;
+            block-size: 30rem;
+            min-block-size: fit-content;
+            background-color: transparent;
+        }
+        .twitch iframe {
+            display: block;
+            inline-size: 100%;
+            block-size: 100%;
+        }
+
         .qrcode {
             display: block;
+            grid-row: r1 / r2;
             grid-column: c1 / c2;
             inline-size: 8.384rem;
             block-size: 18.75rem;
@@ -132,6 +155,7 @@
         }
 
         ul {
+            grid-row: r1 / r2;
             grid-column: c2 / cend;
             display: flex;
             inline-size: 100%;
@@ -199,9 +223,11 @@
                title="youtube.com/juliojamil">juliojamil</a>
         </li>
     </ul>
+
+    <!-- Add a placeholder for the Twitch embed -->
+    <div class="twitch" id="twitch-embed"></div>
 </section>
-<!-- Add a placeholder for the Twitch embed -->
-<div id="twitch-embed"></div>
+
 <!-- Load the Twitch embed JavaScript file -->
 <script src="https://embed.twitch.tv/embed/v1.js"></script>
 
@@ -210,8 +236,10 @@
     new Twitch.Embed("twitch-embed", {
         autoplay: true,
         muted: true,
+        width: "100%",
         allowfullscreen: true,
         channel: "juliojamil",
+        layout: "video",
         // Only needed if this page is going to be embedded on other websites
         parent: ["juliojamil.github.io"]
     });

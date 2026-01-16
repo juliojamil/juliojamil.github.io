@@ -13,6 +13,7 @@
 !/v1-0-0/.gitignore
 
 !/dev/
+!/dev/gitcommit.json
 
 **/mkcert/
 **/mkcert/**

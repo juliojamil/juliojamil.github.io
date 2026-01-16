@@ -26,8 +26,13 @@ const state_running_contract = () => {
 const privateInterface = Object.create(null);
 privateInterface.circularMemory = () => {
     if(!state_running_contract()) return false;
-    const block = ElementMemoryStore[cursor];
-    if(!block) return false;
+    let block = ElementMemoryStore[cursor];
+
+    if(block === null) {
+        ElementMemoryStore[cursor] = new ElementDataBlock(BLOCK_SIZE);
+        block = ElementMemoryStore[cursor];
+    }
+
     if(block.size >= BLOCK_SIZE) {
         cursor = (cursor+1);
         if(cursor >= MAX_BLOCK_SIZE) cursor = 0;

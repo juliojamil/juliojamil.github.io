@@ -11,9 +11,9 @@ const start_request = (_) => {
 
     const container = root();
 
-    header(container)
+    store.element.attach("header.canvas", header(container));
     store.element.attach("main.canvas", main(container));
-    footer(container);
+    store.element.attach("footer.canvas", footer(container));
 
     Content.start_request({Components});
     //Components.timer.start_request();

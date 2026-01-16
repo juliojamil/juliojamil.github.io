@@ -4,7 +4,7 @@
 
 header, main, footer {
   display: inline-flex;
-  gap: 0;
+  gap: 0.125rem;
   flex-direction: column;
   inline-size: 100%;
   //background-color: var(--bg-color);

@@ -10,10 +10,20 @@ const maintenance = () => {
     parent.appendChild(article);
 };
 
+const copyright = () => {
+    const currentYear = new Date().getFullYear();
+    const content = `\u00A9 2025-${currentYear}, Jamil Services.`;
+    const article = Components.container.element.article();
+    article.innerText = content;
+    const parent = Components.container.store.element.recover("footer.canvas");
+    parent.appendChild(article);
+};
+
 const modInterface = Object.create(null);
 modInterface.start_request = (context = {}) => {
     Components = context.Components;
     maintenance();
+    copyright();
 };
 Object.freeze(modInterface);
 

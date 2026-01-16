@@ -1,3 +1,11 @@
 .footer-container {
-  block-size: 40px;
+  padding: 0.5rem !important;
+  block-size: fit-content;
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem;
+
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: bold;
 }

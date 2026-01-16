@@ -1,0 +1,12 @@
+*
+!/.gitignore
+!/assets/
+!/assets/**
+
+!/favicon.ico
+!/index.html
+!/robots.txt
+!/sitemap.xml
+
+**/olds/
+**/olds/**

@@ -32,7 +32,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
         run: |
-          cd gh-v1
+          cd v1-0-0
           pnpm install
           pnpm run build
           cd dist
@@ -41,7 +41,7 @@ jobs:
         name: Upload dist
         with:
           name: github-pages
-          path: gh-v1/artifact.tar
+          path: v1-0-0/artifact.tar
 
   deploy:
     needs: build

@@ -1,0 +1,22 @@
+.main-container {
+  position: relative;
+  flex-grow: 1;
+ // background-color: white;
+  align-items: center;
+  justify-content: center;
+/*
+  .alertpix-iframe {
+    display: inline-flex;
+    inline-size: 448px;
+    block-size: 480px;
+    overflow: hidden !important;
+  }
+  */
+  .kofi-panel-box {
+    display: block;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    block-size: 650px;
+  }
+}

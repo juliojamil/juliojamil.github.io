@@ -1,0 +1,46 @@
+:root {
+  --bg-color: #1a1a1aff;
+}
+html {
+  inline-size: 100%;
+  block-size: 100%;
+
+  @supports (inline-size: 100dvw) {
+    inline-size: 100dvw;
+  }
+  @supports (block-size: 100dvh) {
+    block-size: 100dvh;
+  }
+
+  &, body, *, *::before, *::after {
+    box-sizing: border-box;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  &, body {
+    background-color: var(--bg-color);
+    min-inline-size: fit-content;
+  }
+  body {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+  .root-container {
+    display: block;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    background-color: var(--bg-color);
+  }
+}
+.kofi-btn-box {
+  position: fixed;
+  bottom: 8px;
+  right: 10px;
+  display: block;
+  inline-size: 194px;
+  block-size: 80px;
+  overflow: hidden !important;
+}

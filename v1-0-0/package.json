@@ -1,0 +1,26 @@
+{
+  "name": "juliojamil-github-io",
+  "version": "1.0.0",
+  "description": "juliojamil.github.io",
+  "type": "module",
+  "module": "src/app/main.js",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "build": "rm -rf dist/assets && vite build"
+  },
+  "keywords": [],
+  "author": "Jamil Services <jamilservices@gmail.com>",
+  "license": "ISC",
+  "packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48",
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "glob": "^13.0.0",
+    "postcss": "^8.5.6",
+    "postcss-nested": "^7.0.2",
+    "sass": "^1.97.2",
+    "terser": "^5.44.1",
+    "vite": "^7.3.1",
+    "vite-plugin-mkcert": "^1.17.9"
+  }
+}

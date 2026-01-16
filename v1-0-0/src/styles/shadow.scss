@@ -1,0 +1,17 @@
+@use "_layout/all";
+:host {
+  display: flex !important;
+  gap: 4px;
+  flex-direction: column;
+  inline-size: 100%;
+  block-size: 100%;
+  color: #fffaf0;
+  font-size: 2rem;
+
+  &, *, *::before, *::after {
+    box-sizing: border-box;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+}

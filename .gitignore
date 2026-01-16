@@ -6,6 +6,8 @@
 !/.github/workflows/deploy-to-pages.yml
 
 !/.gitignore
+!/README.md
+
 !/gh-v1/
 !/gh-v1/.gitignore
 

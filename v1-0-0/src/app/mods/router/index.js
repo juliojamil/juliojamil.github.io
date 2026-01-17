@@ -1,16 +1,15 @@
 "use strict";
 
-let CALLBACK_STORE = null;
-let HEADER_STORE = null;
+import {routerStore} from "@components/router/store.js";
 
-const INDEX_MAP_STORE = new Map();
-
-let cursor = 0;
+let container;
 
 const modState = {
     running: false,
     stopped: false,
-    context: 6
+    loaded: false,
+    fragment: "#!/",
+    title: ""
 };
 Object.seal(modState);
 
@@ -23,93 +22,161 @@ const state_stopped_contract = () => {
     return (!running && stopped);
 };
 
-const activeinterface = Object.create(null);
-activeinterface.run = () => {
-    if(state_stopped_contract() || INDEX_MAP_STORE.size === 0) return;
-    console.log(INDEX_MAP_STORE.size)
+const privateInterface = Object.create(null);
+const setLoaded = (_) => {
+    if(state_stopped_contract() || modState.loaded) return;
+    modState.loaded = true;
+    privateInterface.fragment();
 };
-Object.freeze(activeinterface);
+Object.freeze(setLoaded);
+const hashChange = (_) => {
+    if(state_stopped_contract() || !modState.loaded) return;
+    privateInterface.fragment();
+};
+Object.freeze(hashChange);
 
-const populateInterface = Object.create(null);
-populateInterface.header = (index, size, context) => {
+const createHeadTag = (context, link) => {
+    if(!Array.isArray(context)) return;
+    let element;
+    if(link) {
+        element = container.element.linkTag();
+    } else element = container.element.metaTag();
+
+    const size = context.length;
+    for(let i = 0; size > i; i++) {
+        const item = context[i];
+        if(!item) continue;
+        const [name, value] = item;
+        if(!name || !value) continue;
+        element.setAttribute(name.toString(), value.toString());
+    }
+    window.document.head.appendChild(element);
+};
+const updateTitleTag = (context) => {
+    if(!context) return;
     try {
-        const headerSchema = new Array(size).fill(null);
-        const target = context[4];
-        const description = context[3];
-        const link = context[2];
-        const title = context[1];
-        const id = context[0];
+        let content = context;
+        const {title} = modState;
+        if(title) content = title +"- "+ context;
+        window.document.title = content;
 
-        if (id) headerSchema[0] = id;
-        if (title) headerSchema[1] = title;
-        if (link) headerSchema[2] = link;
-        if (description) headerSchema[3] = description;
-        if (target) headerSchema[4] = target;
+        const metaTag = window.document.querySelector("meta[name='dcterms.title']");
+        if(metaTag) {
+            metaTag.content = content;
+            return;
+        }
 
-        HEADER_STORE[index] = headerSchema;
-
-        return id;
+        createHeadTag([
+            ["name", "dcterms.title"],
+            ["content", content]
+        ]);
     } catch (err) {
         console.error(err.message);
     }
-
-    return undefined;
 };
-populateInterface.callback = (index, callback_fn) => {
-    if(typeof callback_fn !== "function") return false;
-    CALLBACK_STORE[index] = callback_fn;
-    return true;
-};
-populateInterface.reset = (index) => {
-    CALLBACK_STORE[index] = null;
-    HEADER_STORE[index] = null;
-};
-populateInterface.start = (context, size) => {
-    const size_contract = modState.context;
+const updateDescriptionTag = (context) => {
+    if (!context) return;
+    try {
+        const content = context.toLowerCase();
+        const metaDescTag = window.document.querySelector("meta[name='description']");
+        const metaDcDescTag = window.document.querySelector("meta[name='dcterms.description']");
+        if (metaDescTag) {
+            metaDescTag.content = content;
+        } else createHeadTag([
+            ["name", "description"],
+            ["content", content]
+        ]);
 
-    for(let i = (size - 1); i >= 0; i--) {
-        const item = context[i];
-
-        if(!item || !Array.isArray(item) || item.length !== size_contract) continue;
-        const index = cursor;
-
-        if(!populateInterface.callback(index, item[5])) continue;
-        const id = populateInterface.header(index, (size_contract - 1), item);
-        if(!id) {
-            populateInterface.reset(index);
-            continue;
-        }
-        if(INDEX_MAP_STORE.get(id)) {
-            populateInterface.reset(index);
-            continue;
-        }
-        INDEX_MAP_STORE.set(id, index);
-        cursor = (cursor+1);
+        if (metaDcDescTag) {
+            metaDcDescTag.content = content;
+        } else createHeadTag([
+            ["name", "dcterms.description"],
+            ["content", content]
+        ]);
+    } catch (err) {
+        console.error(err.message);
     }
-
-    activeinterface.run();
 };
-Object.freeze(populateInterface);
+const updateCanonicalTag = () => {
+    try {
+        const content = window.location.href;
+        const metaTag = window.document.querySelector("link[rel='canonical']");
+        if(metaTag) {
+            metaTag.href = content;
+            return;
+        }
+
+        createHeadTag([
+            ["rel", "canonical"],
+            ["href", content]
+        ], true);
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+privateInterface.error404 = () => {
+    const {title, fragment} = modState;
+    const page = fragment + "404";
+
+    if(title) {
+        window.document.title = title +"- Error 404";
+    } else window.document.title = "Error 404";
+    window.history.pushState({}, null, page)
+};
+privateInterface.fragment = () => {
+    const {hash} = window.location;
+    let page = "home";
+    if(hash) page = hash.replace(modState.fragment, "").toLowerCase();
+
+    if(page === "404") return privateInterface.error404();
+
+    const context = routerStore.getAll(page);
+    if(!context) window.location.href = modState.fragment + "404";
+
+    const callback = context[5];
+    const target = context[4];
+    const description = context[3];
+    const link = context[2];
+    const title = context[1];
+
+    if(title) updateTitleTag(title);
+    if(description) updateDescriptionTag(description);
+    if(link) updateCanonicalTag(link);
+    if(callback) callback(target);
+};
+Object.freeze(privateInterface);
+
+const activeInterface = Object.create(null);
+activeInterface.run = () => {
+    if(state_stopped_contract() || routerStore.size() === 0) return;
+
+    window.addEventListener("hashchange", hashChange);
+    window.addEventListener("load", setLoaded);
+
+};
+Object.freeze(activeInterface);
 
 const modInterface = Object.create(null);
-modInterface.start_request = (context) => {
-    if(state_running_contract(context) || !Array.isArray(context)) return;
+modInterface.start_request = (Components, context) => {
+    if(!Components || state_running_contract() || !Array.isArray(context)) return;
 
-    const size = context.length;
     modState.running = true;
+    container = Components.container;
+    Object.freeze(Components);
 
-    CALLBACK_STORE = new Array(size).fill(null);
-    HEADER_STORE = new Array(size).fill(null);
-    Object.seal(CALLBACK_STORE);
-    Object.seal(HEADER_STORE);
+    const titleTag = window.document.title;
+    if(titleTag) modState.title = titleTag.split("-")[0] +" ";
 
-    populateInterface.start(size, context);
+    if(routerStore.start_request(context)) activeInterface.run();
 };
 modInterface.stop_request = () => {
     if(state_stopped_contract()) return;
 
     modState.running = false;
     modState.stopped = true;
+
+    routerStore.stop_request();
 };
 Object.freeze(modInterface);
 

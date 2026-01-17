@@ -7,6 +7,8 @@ import {ElementMain} from "@components/container/element/main.js";
 import {ElementFooter} from "@components/container/element/footer.js";
 import {ElementArticle} from "@components/container/element/article.js";
 import {ElementFragment} from "@components/container/element/fragment.js";
+import {ElementMetaTag} from "@components/container/element/meta.js";
+import {ElementLinkTag} from "@components/container/element/link.js";
 
 export const Element = Object.freeze({
     section: ElementSection,
@@ -15,5 +17,7 @@ export const Element = Object.freeze({
     footer: ElementFooter,
     article: ElementArticle,
     fragment: ElementFragment,
-    iframe: ElementIframe
+    iframe: ElementIframe,
+    metaTag: ElementMetaTag,
+    linkTag: ElementLinkTag,
 });

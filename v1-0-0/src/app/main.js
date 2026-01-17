@@ -7,14 +7,14 @@ import {Content} from "@components/content/index.js";
 const testRouters = () => [
     ["id1", "title", "link", "description", "target", console.log],
     ["id2", "title", "link", "description", "target", console.log],
-    ["id3", "title", "link", "description", "target", console.log],
+    ["id3", "title3", "link3", "description3", "target3", console.log],
 ];
 
 const start_request = (_) => {
     const {root, header, main, footer, store} = Components.container;
 
     store.start_request();
-    Components.router.start_request(testRouters());
+    Components.router.start_request(Components, testRouters());
 
     const container = root();
 

@@ -1,6 +1,7 @@
 "use strict";
 
 import {EventDataBlock} from "@components/container/store/event/data-block.js";
+import {ElementDataBlock} from "@components/container/store/element/data-block.js";
 
 const BLOCK_SIZE = 1024;
 const MAX_BLOCK_SIZE = 10;
@@ -38,8 +39,13 @@ const interface_attach_contract = (eventObject, elementObject) => {
 const privateInterface = Object.create(null);
 privateInterface.circularMemory = () => {
     if(!state_running_contract()) return false;
-    const block = EventMemoryStore[cursor];
-    if(!block) return false;
+    let block = EventMemoryStore[cursor];
+
+    if(block === null) {
+        EventMemoryStore[cursor] = new ElementDataBlock(BLOCK_SIZE);
+        block = EventMemoryStore[cursor];
+    }
+
     if(block.size >= BLOCK_SIZE) {
         cursor = (cursor+1);
         if(cursor >= MAX_BLOCK_SIZE) cursor = 0;

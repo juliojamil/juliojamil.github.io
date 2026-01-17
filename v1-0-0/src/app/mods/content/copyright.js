@@ -41,7 +41,7 @@ const getDateFromCloudflare = () => {
                         .split('\n')[3]
                         .replace("ts=", "");
 
-                    return new Date(Math.trunc(Number(timestamp))).getFullYear();
+                    return new Date(Math.trunc(Number(timestamp)) * 1000).getFullYear();
                 })
                 .catch(err => {
                     if(err) console.error(err.message);

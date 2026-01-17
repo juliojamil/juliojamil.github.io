@@ -8,7 +8,7 @@ let lastParent = null;
 
 const modState = {
     home: homePageContent,
-    support: supportPageContent
+    "support-me": supportPageContent
 };
 Object.freeze(modState);
 
@@ -33,7 +33,7 @@ modInterface.getPage = (Components, context) => {
     if(!element) return;
 
     const child = parentElement.firstChild;
-    parentElement.removeChild(child);
+    if(child) parentElement.removeChild(child);
 
     parentElement.appendChild(element);
 };

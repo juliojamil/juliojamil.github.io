@@ -1,14 +1,16 @@
 "use strict";
 
 import {CopyRightContent} from "@components/content/copyright.js";
-import {MaintenanceContent} from "@components/content/maintenance.js";
+//import {MaintenanceContent} from "@components/content/maintenance.js";
 import {PageContent} from "@components/content/page/index.js";
 
 let Components;
 
 const mainContent = () => {
     const parent = Components.container.store.element.recover("main.canvas");
-    MaintenanceContent(Components.container, parent);
+    const empty = Components.container.element.section();
+    parent.appendChild(empty);
+    //MaintenanceContent(Components.container, parent);
 };
 
 const footerContent = (copyright) => {

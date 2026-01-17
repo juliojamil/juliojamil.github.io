@@ -12,7 +12,7 @@ const getPage = (context) => {
 
 const routers = () => [
     ["home", "Home", URL +"/home", "Júlio Jamil, home", "main.canvas", getPage],
-    ["support", "Support Me", URL +"/support", "Júlio Jamil, support, donate", "main.canvas", getPage],
+    ["support-me", "Support Me", URL +"/support", "Júlio Jamil, support, donate", "main.canvas", getPage],
     ["404", "Not Found (404)", URL +"/404", "Júlio Jamil, notfound, 404", "main.canvas", null],
 ];
 

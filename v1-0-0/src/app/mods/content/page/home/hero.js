@@ -5,7 +5,7 @@ const modInterface = Object.create(null);
 modInterface.content = (container) => {
     if(!container) return undefined;
     const section = container.element.section();
-    section.innerText = "Hero in Home Section";
+    section.innerText = "\'Home\' Section under maintenance";
 
     return section;
 };

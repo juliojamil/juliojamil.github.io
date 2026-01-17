@@ -121,8 +121,9 @@ privateInterface.error404 = () => {
     //window.history.pushState({}, null, page);
     if(!parentElement) return;
     const child = parentElement.firstChild;
-    parentElement.removeChild(child);
+    if(child) parentElement.removeChild(child);
     parentElement.innerText = "Error 404";
+
 };
 privateInterface.fragment = () => {
     const {hash} = window.location;
@@ -152,7 +153,7 @@ privateInterface.fragment = () => {
     if(callback) callback([page, target]);
     if(page === "404") privateInterface.error404();
 
-    window.history.pushState({}, null, hash);
+    window.history.pushState({}, null, link);
 };
 Object.freeze(privateInterface);
 

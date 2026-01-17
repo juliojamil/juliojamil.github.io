@@ -116,9 +116,7 @@ const updateCanonicalTag = () => {
 };
 
 privateInterface.error404 = () => {
-    //const page = modState.fragment + "404";
     const parentElement = container.store.element.recover("main.canvas");
-    //window.history.pushState({}, null, page);
     if(!parentElement) return;
     const child = parentElement.firstChild;
     if(child) parentElement.removeChild(child);
@@ -126,7 +124,7 @@ privateInterface.error404 = () => {
 
 };
 privateInterface.fragment = () => {
-    const {hash} = window.location;
+    const {hash, href} = window.location;
     let page;
 
     if(!hash) {
@@ -153,7 +151,7 @@ privateInterface.fragment = () => {
     if(callback) callback([page, target]);
     if(page === "404") privateInterface.error404();
 
-    window.history.pushState({}, null, link);
+    window.history.pushState({}, null, href);
 };
 Object.freeze(privateInterface);
 

@@ -4,10 +4,17 @@ import "@styles/main.scss";
 import {Components} from "@components/index.js";
 import {Content} from "@components/content/index.js";
 
+const testRouters = () => [
+    ["id1", "title", "link", "description", "target", console.log],
+    ["id2", "title", "link", "description", "target", console.log],
+    ["id3", "title", "link", "description", "target", console.log],
+];
+
 const start_request = (_) => {
     const {root, header, main, footer, store} = Components.container;
 
     store.start_request();
+    Components.router.start_request(testRouters());
 
     const container = root();
 

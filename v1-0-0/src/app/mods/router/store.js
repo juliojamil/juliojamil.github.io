@@ -68,12 +68,13 @@ activeinterface.start = (context, size) => {
         if(!item || !Array.isArray(item) || item.length !== size_contract) continue;
         const index = cursor;
 
-        if(!activeinterface.callback(index, item[5])) continue;
         const id = activeinterface.header(index, (size_contract - 1), item);
         if(!id) {
             activeinterface.reset(index);
             continue;
         }
+        if(id !== "404" && !activeinterface.callback(index, item[5])) continue;
+
         if(INDEX_MAP_STORE.get(id)) {
             activeinterface.reset(index);
             continue;

@@ -4,17 +4,23 @@ import "@styles/main.scss";
 import {Components} from "@components/index.js";
 import {Content} from "@components/content/index.js";
 
-const testRouters = () => [
-    ["id1", "title", "link", "description", "target", console.log],
-    ["id2", "title", "link", "description", "target", console.log],
-    ["id3", "title3", "link3", "description3", "target3", console.log],
+const URL = "https://juliojamil.github.io/#!";
+
+const getPage = (context) => {
+    Content.page(Components, context);
+};
+
+const routers = () => [
+    ["home", "Home", URL +"/home", "Júlio Jamil, home", "main.canvas", getPage],
+    ["support", "Support Me", URL +"/support", "Júlio Jamil, support, donate", "main.canvas", getPage],
+    ["404", "Not Found (404)", URL +"/404", "Júlio Jamil, notfound, 404", "main.canvas", null],
 ];
 
 const start_request = (_) => {
     const {root, header, main, footer, store} = Components.container;
 
     store.start_request();
-    Components.router.start_request(Components, testRouters());
+    Components.router.start_request(Components, routers());
 
     const container = root();
 

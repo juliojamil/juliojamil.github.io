@@ -2,6 +2,8 @@
 
 import {CopyRightContent} from "@components/content/copyright.js";
 import {MaintenanceContent} from "@components/content/maintenance.js";
+import {PageContent} from "@components/content/page/index.js";
+
 let Components;
 
 const mainContent = () => {
@@ -17,6 +19,7 @@ const footerContent = (copyright) => {
 };
 
 const modInterface = Object.create(null);
+modInterface.page = PageContent;
 modInterface.start_request = (context = {}) => {
     Components = context.Components;
     mainContent();

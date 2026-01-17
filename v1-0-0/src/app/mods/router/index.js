@@ -116,23 +116,29 @@ const updateCanonicalTag = () => {
 };
 
 privateInterface.error404 = () => {
-    const {title, fragment} = modState;
-    const page = fragment + "404";
-
-    if(title) {
-        window.document.title = title +"- Error 404";
-    } else window.document.title = "Error 404";
-    window.history.pushState({}, null, page)
+    //const page = modState.fragment + "404";
+    const parentElement = container.store.element.recover("main.canvas");
+    //window.history.pushState({}, null, page);
+    if(!parentElement) return;
+    const child = parentElement.firstChild;
+    parentElement.removeChild(child);
+    parentElement.innerText = "Error 404";
 };
 privateInterface.fragment = () => {
     const {hash} = window.location;
-    let page = "home";
-    if(hash) page = hash.replace(modState.fragment, "").toLowerCase();
+    let page;
 
-    if(page === "404") return privateInterface.error404();
+    if(!hash) {
+        window.location.href = modState.fragment + "home";
+        return;
+    }
+    page = hash.replace(modState.fragment, "").toLowerCase();
 
     const context = routerStore.getAll(page);
-    if(!context) window.location.href = modState.fragment + "404";
+    if(typeof context === "undefined") {
+        window.location.href = modState.fragment + "404";
+        return;
+    }
 
     const callback = context[5];
     const target = context[4];
@@ -143,7 +149,10 @@ privateInterface.fragment = () => {
     if(title) updateTitleTag(title);
     if(description) updateDescriptionTag(description);
     if(link) updateCanonicalTag(link);
-    if(callback) callback(target);
+    if(callback) callback([page, target]);
+    if(page === "404") privateInterface.error404();
+
+    window.history.pushState({}, null, hash);
 };
 Object.freeze(privateInterface);
 

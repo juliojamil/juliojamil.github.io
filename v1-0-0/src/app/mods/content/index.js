@@ -1,20 +1,17 @@
 "use strict";
 
+import {CopyRightContent} from "@components/content/copyright.js";
+import {MaintenanceContent} from "@components/content/maintenance.js";
 let Components;
 
-const maintenance = () => {
-    const content = "under maintenance";
-    const article = Components.container.element.article();
-    article.innerText = content;
+const mainContent = () => {
     const parent = Components.container.store.element.recover("main.canvas");
-    parent.appendChild(article);
+    MaintenanceContent(Components.container, parent);
 };
 
-const copyright = () => {
-    const currentYear = new Date().getFullYear();
-    const content = `\u00A9 2025-${currentYear}, Jamil Services.`;
+const footerContent = (copyright) => {
     const article = Components.container.element.article();
-    article.innerText = content;
+    article.innerText = copyright;
     const parent = Components.container.store.element.recover("footer.canvas");
     parent.appendChild(article);
 };
@@ -22,8 +19,8 @@ const copyright = () => {
 const modInterface = Object.create(null);
 modInterface.start_request = (context = {}) => {
     Components = context.Components;
-    maintenance();
-    copyright();
+    mainContent();
+    CopyRightContent(footerContent);
 };
 Object.freeze(modInterface);
 

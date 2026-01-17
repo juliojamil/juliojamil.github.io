@@ -9,5 +9,5 @@
   ":wrench: chore": "Other changes that don't modify src or test files",
   ":fast_forward: revert": "Reverts a previous commit",
   ":sparkles: feat": "A new feature",
-  ":bug: fix": "A bug fix"
+  ":hammer: fix": "A bug fix"
 }

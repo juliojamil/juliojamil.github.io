@@ -1,10 +1,9 @@
 "use strict";
 
 import {EventDataBlock} from "@components/container/store/event/data-block.js";
-import {ElementDataBlock} from "@components/container/store/element/data-block.js";
 
 const BLOCK_SIZE = 1024;
-const MAX_BLOCK_SIZE = 10;
+const MAX_BLOCK_SIZE = 4;
 
 const EventMemoryStore = new Array(MAX_BLOCK_SIZE).fill(null);
 Object.seal(EventMemoryStore);
@@ -42,7 +41,7 @@ privateInterface.circularMemory = () => {
     let block = EventMemoryStore[cursor];
 
     if(block === null) {
-        EventMemoryStore[cursor] = new ElementDataBlock(BLOCK_SIZE);
+        EventMemoryStore[cursor] = new EventDataBlock(BLOCK_SIZE);
         block = EventMemoryStore[cursor];
     }
 
@@ -151,18 +150,15 @@ modInterface.attach = (eventObject, elementObject) => {
         const element = ElementStore.recover(elementId);
         if(!element) return false;
 
-        element.addListener(eventName, callback);
+       element.addEventListener(eventName, callback);
 
         if(!privateInterface.circularMemory()) {
             console.error("EventMemoryStore Error:", "MemoryStore is completely full!");
             return false;
         }
-
         const blockIndex = cursor;
         cursor = (cursor+1);
-
         const block = EventMemoryStore[blockIndex];
-
         if(block.size >= BLOCK_SIZE) {
             console.error("EventMemoryStore Error:", "The block has reached its limit!");
             return false;
@@ -174,7 +170,6 @@ modInterface.attach = (eventObject, elementObject) => {
         block.size = (block.size+1);
 
         block.events[dataIndex] = callback;
-
         EventIndexMapStore.set(eventId, [blockIndex, dataIndex, elementId, eventName]);
 
         return true;

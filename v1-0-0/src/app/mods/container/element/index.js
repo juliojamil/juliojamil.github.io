@@ -9,6 +9,8 @@ import {ElementArticle} from "@components/container/element/article.js";
 import {ElementFragment} from "@components/container/element/fragment.js";
 import {ElementMetaTag} from "@components/container/element/meta.js";
 import {ElementLinkTag} from "@components/container/element/link.js";
+import {ElementListUl} from "@components/container/element/list_ul.js";
+import {ElementListLi} from "@components/container/element/list_li.js";
 
 export const Element = Object.freeze({
     section: ElementSection,
@@ -20,4 +22,6 @@ export const Element = Object.freeze({
     iframe: ElementIframe,
     metaTag: ElementMetaTag,
     linkTag: ElementLinkTag,
+    listUl: ElementListUl,
+    listLi: ElementListLi
 });

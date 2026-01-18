@@ -56,7 +56,8 @@ const modInterface = Object.create(null);
 modInterface.content = (container) => {
     if(!container) return undefined;
     const {element} = container;
-    const section = element.section();
+    const nav = element.nav();
+    nav.setAttribute("class", "menu-container");
     const btn_group = element.listUl();
     btn_group.setAttribute("class", "btn-group");
     const {size, items} = modState;
@@ -76,9 +77,9 @@ modInterface.content = (container) => {
         btn_group.appendChild(btn_box);
     }
 
-    section.appendChild(btn_group);
+    nav.appendChild(btn_group);
 
-    return section;
+    return nav;
 };
 Object.freeze(modInterface);
 

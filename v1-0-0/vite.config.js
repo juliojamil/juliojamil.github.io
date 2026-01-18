@@ -41,7 +41,7 @@ const settings = {
         cssCodeSplit: true,
         rollupOptions: {
             output: {
-                entryFileNames: 'assets/js/app-[hash:10].js',
+                entryFileNames: 'assets/js/[name]-[hash:10].js',
                 format: 'es',
                 assetFileNames: 'assets/[name][extname]'
             },

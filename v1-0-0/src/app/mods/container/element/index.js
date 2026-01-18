@@ -11,6 +11,7 @@ import {ElementMetaTag} from "@components/container/element/meta.js";
 import {ElementLinkTag} from "@components/container/element/link.js";
 import {ElementListUl} from "@components/container/element/list_ul.js";
 import {ElementListLi} from "@components/container/element/list_li.js";
+import {ElementNav} from "@components/container/element/nav.js";
 
 export const Element = Object.freeze({
     section: ElementSection,
@@ -23,5 +24,6 @@ export const Element = Object.freeze({
     metaTag: ElementMetaTag,
     linkTag: ElementLinkTag,
     listUl: ElementListUl,
-    listLi: ElementListLi
+    listLi: ElementListLi,
+    nav: ElementNav
 });

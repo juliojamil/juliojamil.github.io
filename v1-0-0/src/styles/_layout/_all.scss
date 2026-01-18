@@ -5,7 +5,15 @@
 header, main, footer {
   display: inline-flex;
   gap: 0.125rem;
-  flex-direction: column;
   inline-size: 100%;
   //background-color: var(--bg-color);
+}
+main, footer {
+  display: inline-flex;
+  gap: 0.125rem;
+  inline-size: 100%;
+  flex-direction: column;
+}
+header {
+  flex-direction: row;
 }

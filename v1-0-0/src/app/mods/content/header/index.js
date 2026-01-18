@@ -2,16 +2,21 @@
 "use strict";
 
 import {navHeaderContent} from "@components/content/header/nav.js";
+import {logoHeaderContent} from "@components/content/header/logo.js";
 
 const modInterface = Object.create(null);
 modInterface.content = (container) => {
     if(!container) return undefined;
-    const section = container.element.section();
-    const nav = navHeaderContent(container);
-    if(!nav) return undefined;
-    section.appendChild(nav);
+    const frag = container.element.fragment();
 
-    return section;
+    const logo = logoHeaderContent(container);
+    const nav = navHeaderContent(container);
+    if(!nav || !logo) return undefined;
+
+    frag.appendChild(logo);
+    frag.appendChild(nav);
+
+    return frag;
 };
 Object.freeze(modInterface);
 

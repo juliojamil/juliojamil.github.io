@@ -1,11 +1,13 @@
 // v1-0-0/src/app/mods/content/header/nav.js
 "use strict";
 
+let btn_active = null;
+
 const modState = {
     size: 3,
     prefix: ["btn.box", "btn.item"],
     items: [
-        {target: "home", title: "Home", active: true},
+        {target: "home", title: "Home"},
         {target: "support-me", title: "Support Me"},
         {target: "404test", title: "404 test"},
     ]
@@ -16,7 +18,8 @@ const btn_action = (evt) => {
     const {target} = evt;
     if(!target) return;
     const pageId = target.getAttribute("anchor");
-
+    /*const targetElementRef = target.getAttribute("listen");
+    if(targetElementRef) btn_active = modState.prefix[0] +"."+ targetElementRef;*/
     if(pageId) window.location.href = "/#!/"+ pageId;
     return true;
 };
@@ -29,17 +32,15 @@ const btn_content = (context) => {
     const item = context[1];
     const {element, store} = context[0];
 
-    const {target, title, active} = item;
+    const {target, title} = item;
 
     const elementId = elId +"."+ nameId;
     const eventId = evId +"." + nameId;
 
     const btn_box = element.listLi();
     const btn_content = element.article();
-    let classes = "btn-box";
-    if(active) classes = classes +" active";
 
-    btn_box.setAttribute("class", classes);
+    btn_box.setAttribute("class", "btn-box");
     btn_box.setAttribute("listen", nameId);
     btn_box.setAttribute("anchor", target);
 
@@ -72,14 +73,13 @@ modInterface.content = (container) => {
         const item = items[i];
         if(!item) continue;
 
-        const nameId = "header."+ i;
+        const nameId = "header."+ item.target;
 
         const btn_box = btn_content([container, item, elId, evId, nameId]);
         if(!btn_box) continue;
 
         btn_group.appendChild(btn_box);
     }
-
     nav.appendChild(btn_group);
 
     return nav;

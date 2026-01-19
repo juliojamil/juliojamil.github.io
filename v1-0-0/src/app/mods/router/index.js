@@ -9,7 +9,8 @@ const modState = {
     stopped: false,
     loaded: false,
     fragment: "#!/",
-    title: ""
+    title: "",
+    nav: null
 };
 Object.seal(modState);
 
@@ -115,13 +116,26 @@ const updateCanonicalTag = () => {
     }
 };
 
+const activeRouterNavBtn = (page) => {
+    const navId = "btn.box.header."+ page;
+    const old = modState.nav;
+    if(old || page === "404") {
+        const navHomeMenu = container.store.element.recover(old);
+        if(navHomeMenu) navHomeMenu.classList.remove("active");
+    }
+    const navHomeMenuActive = container.store.element.recover(navId);
+    if(navHomeMenuActive) {
+        navHomeMenuActive.classList.add("active");
+        modState.nav = navId;
+    }
+};
+
 privateInterface.error404 = () => {
     const parentElement = container.store.element.recover("main.canvas");
     if(!parentElement) return;
     const child = parentElement.firstChild;
     if(child) parentElement.removeChild(child);
     parentElement.innerText = "Error 404";
-
 };
 privateInterface.fragment = () => {
     const {hash, href} = window.location;
@@ -151,6 +165,7 @@ privateInterface.fragment = () => {
     if(callback) callback([page, target]);
     if(page === "404") privateInterface.error404();
 
+    activeRouterNavBtn(page);
     window.history.pushState({}, null, href);
 };
 Object.freeze(privateInterface);

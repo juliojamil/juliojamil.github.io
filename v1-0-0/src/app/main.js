@@ -3,10 +3,12 @@
 import "@styles/main.scss";
 import {Components} from "@components/index.js";
 import {Content} from "@components/content/index.js";
+import {c} from "../../dist/assets/js/index-XmPNsEVLaD.js";
 
 const URL = "https://juliojamil.github.io/#!";
 
 const getPage = (context) => {
+    if(!Array.isArray(context)) return;
     Content.page(Components, context);
 };
 

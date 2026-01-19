@@ -5,7 +5,7 @@ const modState = {
     size: 3,
     prefix: ["btn.box", "btn.item"],
     items: [
-        {target: "home", title: "Home"},
+        {target: "home", title: "Home", active: true},
         {target: "support-me", title: "Support Me"},
         {target: "404test", title: "404 test"},
     ]
@@ -29,14 +29,17 @@ const btn_content = (context) => {
     const item = context[1];
     const {element, store} = context[0];
 
-    const {target, title} = item;
+    const {target, title, active} = item;
 
     const elementId = elId +"."+ nameId;
     const eventId = evId +"." + nameId;
 
     const btn_box = element.listLi();
     const btn_content = element.article();
-    btn_box.setAttribute("class", "btn-box");
+    let classes = "btn-box";
+    if(active) classes = classes +" active";
+
+    btn_box.setAttribute("class", classes);
     btn_box.setAttribute("listen", nameId);
     btn_box.setAttribute("anchor", target);
 

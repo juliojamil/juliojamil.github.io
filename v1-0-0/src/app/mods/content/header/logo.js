@@ -6,7 +6,6 @@ modInterface.content = (container) => {
     if(!container) return undefined;
     const section = container.element.section();
     section.setAttribute("class", "logo-container");
-    section.innerText = "logo";
 
     return section;
 };

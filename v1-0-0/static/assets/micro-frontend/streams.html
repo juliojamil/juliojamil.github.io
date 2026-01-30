@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Julio Jamil - Streams</title>
+    <style>
+        html, body {
+            min-inline-size: fit-content;
+            font: 1rem Inter, sans-serif;
+        }
+        html, body, *, *::before, *::after {
+            box-sizing: border-box;
+            border: 0;
+            margin: 0;
+            padding: 0;
+            color: #F6FBFDff;
+            background-color: #1a1a1aff;
+        }
+        body {
+            display: block;
+            inline-size: 100%;
+            block-size: 100%;
+        }
+        article.welcome-hero {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .welcome-hero h2 {
+            font-size: 1.85rem;
+        }
+        .welcome-hero h4 {
+            font-size: 1.5rem;
+        }
+        p {
+            display: inline-flex;
+        }
+        ul.stream-list {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        li {
+            display: inline-flex;
+            flex-direction: row;
+            gap: 1rem;
+            align-items: center;
+        }
+        a, a:active, a:hover, a:visited, a:focus {
+            text-decoration: none !important;
+            color: inherit;
+            inline-size: fit-content;
+            block-size: fit-content;
+            background-color: transparent;
+            padding: 0 !important;
+            outline: none !important;
+            offset: none !important;
+            margin: 0 !important;
+            border: 0 !important;
+            display: inherit;
+        }
+        span {
+            pointer-events: none;
+        }
+        span.stream-source {
+            display: inline-flex;
+            font-size: 1.250rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            inline-size: 6rem;
+            justify-content: center;
+            block-size: fit-content;
+            padding: 0 !important;
+        }
+        span.twitch {
+            color: #9146FF;
+        }
+        span.trovo {
+            color: #3cdb7d;
+        }
+        span.kick {
+            color: #00e701;
+        }
+        span.stream-desc {
+            display: inline-flex;
+            font-size: 0.850rem;
+            text-transform: uppercase;
+            line-height: 1rem;
+            padding-inline-end: 0.15rem !important;
+            padding-inline-start: 0.5rem !important;
+            padding-block: 0.25rem !important;
+            border: 0.08rem #70a0de solid;
+            border-right-color: transparent;
+            border-block-color: transparent;
+            block-size: 5rem;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<article class="welcome-hero">
+    <h2>Sejam bem vindos ao meu pequeno espa&ccedil;o!</h2>
+    <h4>Veja Abaixo uma pequena lista de onde fa&ccedil;o lives:</h4>
+    <ul class="stream-list">
+        <li>
+            <a href="https://www.twitch.tv/juliojamil" target="_blank" rel="nofollow"><span class="stream-source twitch">twitch</span></a><span class="stream-desc">desenvolvimento web e desktop, e casualmente fa&ccedil;o algumas gameplays.</span>
+        </li>
+        <li>
+            <a href="https://trovo.live/juliojamil" target="_blank" rel="nofollow"><span class="stream-source trovo">trovo</span></a><span class="stream-desc">minigame da trovo com intera&ccedil;&atilde;o entre contas, com gameplay de desktop game, e casualmente vetoriza&ccedil;&atilde;o de imagens.</span>
+        </li>
+        <li>
+            <a href="https://kick.com/juliojamil" target="_blank" rel="nofollow"><span class="stream-source kick">kick</span></a><span class="stream-desc">ainda não está definido então faço lives diversas casualmente.</span>
+        </li>
+    </ul>
+</article>
+
+
+
+</body>
+</html>

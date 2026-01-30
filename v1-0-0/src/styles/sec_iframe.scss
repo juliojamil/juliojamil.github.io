@@ -1,9 +1,11 @@
-@use "_layout/all";
+@use "_layout/micros" as m;
+
 :host {
   display: block !important;
   gap: 0;
   inline-size: 100%;
   block-size: 100%;
+  min-inline-size: 21.875rem;
 
   &, *, *::before, *::after {
     box-sizing: border-box;
@@ -11,32 +13,7 @@
     margin: 0;
     padding: 0;
   }
-  /*
-  iframe.alertpix-box {
-    display: inline-block;
-    inline-size: inherit;
-    block-size: inherit;
-    overflow-y: hidden !important;
-  }
-  iframe.kofi-btn-iframe {
-    display: inline-block;
-    inline-size: 100% !important;
-    block-size: 100% !important;
-    margin: 0 !important;
-    border: 0 !important;
-    padding: 0!important;
-    overflow-y: hidden !important;
-  }
-  iframe.kofi-panel-iframe {
-    display: inline-block;
-    inline-size: 100% !important;
-    block-size: 100% !important;
-    margin: 0 !important;
-    border: 0 !important;
-    padding: 0!important;
-    overflow-y: hidden !important;
-    background-color: transparent !important;
-  }
-  */
+
+  @include m.iframe-streams;
 }
 

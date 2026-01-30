@@ -9,7 +9,7 @@ modInterface.sec_iframe = (context, Element, secureShadowRef) => {
         const container = Element.section();
         const iframe = Element.iframe();
 
-        const {source, styles, classes, scroll = "no"} = context;
+        const {source, styles, classes, adopted, scroll = "no"} = context;
         if(source) iframe.src = source;
         if(styles) iframe.setAttribute("style", styles);
         if(classes) iframe.setAttribute("class", classes);
@@ -23,10 +23,11 @@ modInterface.sec_iframe = (context, Element, secureShadowRef) => {
 
         const shadowRoot = secureShadowRef.call(container, {mode: "closed"});
 
-        const styleSheet = new CSSStyleSheet();
-        styleSheet.replaceSync(shadowStyle.sec_iframe);
-        shadowRoot.adoptedStyleSheets = [styleSheet];
-
+        if(adopted && shadowStyle[adopted]) {
+            const styleSheet = new CSSStyleSheet();
+            styleSheet.replaceSync(shadowStyle[adopted]);
+            shadowRoot.adoptedStyleSheets = [styleSheet];
+        }
         shadowRoot.appendChild(iframe);
 
         return frag;

@@ -1,8 +1,9 @@
 .header-container {
   block-size: fit-content;
   gap: 1.5ch;
-  background-color: var(--bg-header-color);
+  background-color: var(--color10);
   align-items: center;
+  color: var(--text);
 
   section.logo-container {
     display: inline-flex;
@@ -20,6 +21,7 @@
     flex-direction: row;
     align-items: start;
     justify-content: center;
+    gap: 0;
   }
 
   .btn-group {
@@ -30,7 +32,7 @@
     min-inline-size: 100%;
     block-size: fit-content;
     padding: 0.25rem;
-    gap: 0.5rem;
+    gap: 1rem;
     position: relative;
     align-items: center;
 
@@ -41,14 +43,19 @@
       align-items: center;
       inline-size: fit-content;
       block-size: fit-content;
-      background-color: var(--bg-header-btn-color);
-      border: 0;
+      background-color: var(--color14);
+      border-width: 0.05rem;
+      border-style: inset;
+      border-color: var(--base);
+
       border-radius: 0.25ch;
       gap: 0;
       cursor: pointer!important;
       padding-right: 0.125rem!important;
 
-      &.active::after {
+
+
+      &::after {
         display: block;
         position: absolute;
         content: " ";
@@ -58,19 +65,21 @@
         border-radius: 50%;
         inline-size: 0.5rem;
         block-size: 0.5rem;
-
-        box-shadow: inset 0 0 2px 2px var(--active-nav-btn-color) !important;
-        background-color: var(--active-nav-btn-color) !important;
+        background-color: var(--color9) !important;
+      }
+      &.active::after {
+        background-color: var(--color6) !important;
       }
 
       .btn-content {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding-inline: 1ch !important;
-        padding-block: 0.5ch !important;
-        font-size: 1.05rem;
+        padding-inline: 2ch !important;
+        padding-block: 1ch !important;
+        font-size: 0.75rem;
         font-weight: 600;
+        letter-spacing: 0.1rem;
         text-transform: uppercase;
         line-height: 1;
         inline-size: fit-content;

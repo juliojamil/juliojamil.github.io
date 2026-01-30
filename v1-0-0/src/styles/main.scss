@@ -1,10 +1,35 @@
 :root {
-  --bg-color: #1a1a1aff;
-  --bg-header-color: #333333ff;
-  --bg-header-btn-color: rgba(117, 75, 189, 0.68);
+  --font: 1rem Inter, sans-serif;
+  --base: #1a1a1aff;
+  --text: #F6FBFDff;
+
+  --color1: #003c5aff; // 900
+  --color2: #005179ff; // 800
+  --color3: #1993D0ff; // 500
+
+  --color4: #1A401Cff;
+  --color5: #235726ff;
+  --color6: #409D44ff;
+
+  --color7: #383838ff;
+  --color8: #4C4C4Cff;
+  --color9: #8B8B8Bff;
+
+  --color10: #303943ff;
+  --color11: #424D5Bff;
+  --color12: #7D8C9Fff;
+
+  --color13: #283A48ff;
+  --color14: #364F62ff;
+  --color15: #6A8FACff;
+
+  --bg-color: var(--base);
+  /*--bg-header-color: #303943;
+  --bg-header-btn-color: #003C5A;
+  --bg-border-color: #003C5A;
   --yellow-color: #fdb929ff;
-  --active-nav-btn-color: rgba(173, 255, 47, 0.91);
-  --default-nav-btn-color: rgba(64, 64, 64, 0.91);
+  --active-nav-btn-color: #409D44;
+  --default-nav-btn-color: #8D8998;*/
 }
 html {
   inline-size: 100%;
@@ -26,6 +51,7 @@ html {
   &, body {
     background-color: var(--bg-color);
     min-inline-size: fit-content;
+    font: var(--font);
   }
   body {
     display: block;

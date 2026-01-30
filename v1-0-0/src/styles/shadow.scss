@@ -6,8 +6,10 @@
   flex-direction: column;
   inline-size: 100%;
   block-size: 100%;
-  color: #fffaf0;
-  font-size: 2rem;
+  color: var(--text);
+  background-color: var(--bg-color);
+  //font-size: 2rem;
+  font: var(--font);
 
   &, *, *::before, *::after {
     box-sizing: border-box;

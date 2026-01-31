@@ -1,19 +1,34 @@
 .header-container {
-  block-size: fit-content;
+  block-size: 3.5rem;
   gap: 1.5ch;
-  background-color: var(--color10);
+  //
   align-items: center;
   color: var(--text);
+  overflow: hidden;
+  background-color: var(--bg-color);
+
+  background-image: url("/assets/glass.png");
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-attachment: local;
+  background-size: 3rem 3rem;
 
   section.logo-container {
     display: inline-flex;
-    inline-size: 11rem;
+    min-inline-size: 11.032rem;
     block-size: 3rem;
+
     background-image: url("/assets/name.png");
     background-position: left top;
     background-repeat: no-repeat;
     background-attachment: local;
     background-size: 100% 100%;
+
+
+    &:hover {
+      animation:fade-1 150ms ease-in-out;
+      cursor: help;
+    }
   }
 
   nav.menu-container {
@@ -43,7 +58,7 @@
       align-items: center;
       inline-size: fit-content;
       block-size: fit-content;
-      background-color: var(--color14);
+      background-color: var(--color7);
       border-width: 0.05rem;
       border-style: inset;
       border-color: var(--base);
@@ -86,8 +101,12 @@
         block-size: fit-content;
         pointer-events: none!important;
         user-select: none;
-
       }
     }
   }
+}
+@keyframes fade-1 {
+  0% {opacity: 1;}
+  50% {opacity: 0;}
+  100% {opacity: 1;}
 }

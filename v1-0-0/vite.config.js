@@ -1,9 +1,13 @@
+// v1-0-0/vite.config.js
 "use strict";
 
 import {defineConfig} from "vite";
 import {dirname, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import { globSync } from 'glob';
+
+import browserslist from 'browserslist';
+import {browserslistToTargets} from 'lightningcss';
 
 import mkcert from 'vite-plugin-mkcert'
 
@@ -28,6 +32,7 @@ const settings = {
         outDir: resolve(__dirname, "dist"),
         //minify: false,
         minify: "terser",
+        cssMinify: "lightningcss",
         target: "es2020",
         terserOptions: {
             mangle: false,
@@ -56,8 +61,15 @@ const settings = {
         keepNames: true
     },
     css: {
-        postcss: {
-            config: "./post.config.js"
+       /* postcss: {
+            config: "./postcss.config.js"
+        }*/
+        transformer: 'lightningcss',
+        lightningcss: {
+            targets: browserslistToTargets(browserslist('>= 0.25%')),
+            drafts: {
+                nesting: true
+            }
         }
     },
     resolve: {

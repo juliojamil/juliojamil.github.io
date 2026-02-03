@@ -1,78 +1,23 @@
-:root {
-  --font: 1rem Inter, sans-serif;
-  --base: #1a1a1aff;
-  --text: #F6FBFDff;
+// v1-0-0/src/styles/main.scss
+@forward "root";
+@use "normalize" as n;
 
-  --color1: #003c5aff; // 900
-  --color2: #005179ff; // 800
-  --color3: #1993D0ff; // 500
-
-  --color4: #1A401Cff;
-  --color5: #235726ff;
-  --color6: #409D44ff;
-
-  --color7: #383838ff;
-  --color8: #4C4C4Cff;
-  --color9: #8B8B8Bff;
-
-  --color10: #303943ff;
-  --color11: #424D5Bff;
-  --color12: #7D8C9Fff;
-
-  --color13: #283A48ff;
-  --color14: #364F62ff;
-  --color15: #6A8FACff;
-
-  --bg-color: var(--base);
-  /*--bg-header-color: #303943;
-  --bg-header-btn-color: #003C5A;
-  --bg-border-color: #003C5A;
-  --yellow-color: #fdb929ff;
-  --active-nav-btn-color: #409D44;
-  --default-nav-btn-color: #8D8998;*/
-}
 html {
-  inline-size: 100%;
-  block-size: 100%;
-
-  @supports (inline-size: 100dvw) {
-    inline-size: 100dvw;
+  @include n.reset-html;
+  :where(p) {
+    @include n.reset-paragraph;
   }
-  @supports (block-size: 100dvh) {
-    block-size: 100dvh;
+  :where(a) {
+    @include n.reset-link;
   }
-
-  &, body, *, *::before, *::after {
-    box-sizing: border-box;
-    border: 0;
-    margin: 0;
-    padding: 0;
-  }
-  &, body {
-    background-color: var(--bg-color);
-    min-inline-size: fit-content;
-    font: var(--font);
+  :where(img, svg) {
+    inline-size: 0;
+    block-size: 0;
   }
   body {
-    display: block;
-    inline-size: 100%;
-    block-size: 100%;
-  }
-  .root-container {
-    display: block;
-    inset: 0;
-    inline-size: 100%;
-    block-size: 100%;
-    background-color: var(--bg-color);
+    @include n.start-body;
+    .root-container {
+      display: none;
+    }
   }
 }
-/*
-.kofi-btn-box {
-  position: fixed;
-  bottom: 8px;
-  right: 10px;
-  display: block;
-  inline-size: 194px;
-  block-size: 80px;
-  overflow: hidden !important;
-}*/

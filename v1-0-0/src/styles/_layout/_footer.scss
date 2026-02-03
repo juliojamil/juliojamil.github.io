@@ -1,13 +1,22 @@
-.footer-container {
+%f-center {
+  justify-content: center;
+  align-items: center;
+}
+%f-text-upperbold {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+%f-color {
+  color: var(--color-neutral-300);
+}
+
+@mixin footer_container {
+  @extend %f-center;
+  @extend %f-text-upperbold;
+  @extend %f-text-upperbold;
+
   padding: 0.5rem !important;
-  block-size: fit-content;
   font-size: 0.75rem;
   letter-spacing: 0.125rem;
 
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  font-weight: bold;
-
-  color: var(--color12);
 }

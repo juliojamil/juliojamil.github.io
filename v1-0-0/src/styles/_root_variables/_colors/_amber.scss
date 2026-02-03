@@ -1,0 +1,16 @@
+// _root_variables/_colors/_amber.scss
+@mixin vcolor-amber {
+  & {
+    --color-amber-700: #7a4b00;
+    --color-amber-500: #d9a441;
+    --color-amber-300: #f0cf8a;
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    & {
+      --color-amber-700: oklch(0.456 0.099 69.144);
+      --color-amber-500: oklch(0.751 0.13 79.849);
+      --color-amber-300: oklch(0.867 0.095 84.975);
+    }
+  }
+}

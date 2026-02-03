@@ -1,25 +1,27 @@
-@use "_layout/all";
-
+@use "normalize" as n;
+@use "_layout/_all" as l;
 :host {
-  display: flex !important;
-  gap: 4px;
-  flex-direction: column;
-  inline-size: 100%;
-  block-size: 100%;
-  color: var(--text);
-  background-color: var(--bg-color);
-  //font-size: 2rem;
-  font: var(--font);
+  :where(p) {
+    @include n.reset-paragraph;
+  }
+  :where(a) {
+    @include n.reset-link;
+  }
+  :where(img, svg) {
+    inline-size: 0;
+    block-size: 0;
+  }
 
-  &, *, *::before, *::after {
-    box-sizing: border-box;
-    border: 0;
-    margin: 0;
-    padding: 0;
-  }
-  .sec-iframe-container {
-    display: block;
-    inline-size: 100%;
-    block-size: 100%;
-  }
+  @include n.reset-default;
+  @include n.reset-all;
+  @include n.reset-background;
+  @include n.reset-text;
+  @include l.layout_base;
+  @extend %full-size;
+  @extend %relative;
+
+  display: flex !important;
+  flex-direction: column;
+  gap: 0;
+  inset: 0;
 }

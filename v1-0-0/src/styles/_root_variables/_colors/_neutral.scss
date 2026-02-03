@@ -1,0 +1,29 @@
+// _root_variables/_colors/_neutral.scss
+@mixin vcolor-neutral {
+  & {
+    /* fallback HEX */
+    --color-neutral-900: #0f0f0f;
+    --color-neutral-800: #1a1a1a; // base
+    --color-neutral-700: #2a2a2a;
+    --color-neutral-600: #3a3a3a;
+    --color-neutral-500: #5a5a5a;
+    --color-neutral-400: #8a8a8a;
+    --color-neutral-300: #bcbcbc;
+    --color-neutral-200: #e0e0e0;
+    --color-neutral-100: #f6fbfd; // text base
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    & {
+      --color-neutral-900: oklch(0.168 0 89.876);
+      --color-neutral-800: oklch(0.218 0 89.876); // base
+      --color-neutral-700: oklch(0.285 0 89.876);
+      --color-neutral-600: oklch(0.348 0 89.876);
+      --color-neutral-500: oklch(0.468 0 89.876);
+      --color-neutral-400: oklch(0.633 0 89.876);
+      --color-neutral-300: oklch(0.795 0 89.876);
+      --color-neutral-200: oklch(0.907 0 89.876);
+      --color-neutral-100: oklch(0.985 0.006 223.455); // text base
+    }
+  }
+}

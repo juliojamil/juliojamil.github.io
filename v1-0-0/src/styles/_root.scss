@@ -1,0 +1,15 @@
+// v1-0-0/src/styles/_root.scss
+@use "_root_variables/all" as r;
+
+:root {
+  @include r.vfont;
+  @include r.vcolor-amber;
+  @include r.vcolor-blue;
+  @include r.vcolor-cyan;
+  @include r.vcolor-green;
+  @include r.vcolor-neutral;
+  @include r.vcolor-red;
+
+  --bg-color: var(--color-neutral-800);
+  --text: var(--color-neutral-100);
+}

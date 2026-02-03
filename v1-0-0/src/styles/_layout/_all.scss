@@ -1,19 +1,32 @@
-@forward "header";
-@forward "main";
-@forward "footer";
+@use "@styles/_extends/_all";
+@use "header" as h;
+@use "main" as m;
+@use "footer" as f;
 
-header, main, footer {
-  display: inline-flex;
+%base_gap {
   gap: 0.125rem;
-  inline-size: 100%;
-  //background-color: var(--bg-color);
 }
-main, footer {
-  display: inline-flex;
-  gap: 0.125rem;
-  inline-size: 100%;
-  flex-direction: column;
-}
-header {
-  flex-direction: row;
+
+@mixin layout_base {
+  header, main, footer {
+    @extend %display-inline-flex;
+    @extend %base_gap;
+  }
+  main {
+    flex-grow: 1;
+    @include m.main_container;
+  }
+  main, footer {
+    @extend %flex-col;
+  }
+  header, footer {
+    @extend %fit-height;
+  }
+  header {
+    @extend %flex-row;
+    @include h.header_container;
+  }
+  footer {
+    @include f.footer_container;
+  }
 }

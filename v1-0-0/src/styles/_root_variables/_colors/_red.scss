@@ -1,0 +1,19 @@
+// _root_variables/_colors/_red.scss
+@mixin vcolor-red {
+  & {
+    /* fallback HEX */
+    --color-red-700: #65201e;
+    --color-red-500: #ee0b2a;
+    --color-red-600: #cc272e;
+    --color-red-300: #e7958e;
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    & {
+      --color-red-700: oklch(35% 0.10 25);
+      --color-red-500: oklch(60% 0.24 25);
+      --color-red-600: oklch(55% 0.20 25);
+      --color-red-300: oklch(75% 0.10 25);
+    }
+  }
+}

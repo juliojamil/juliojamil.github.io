@@ -1,0 +1,16 @@
+// _root_variables/_colors/_cyan.scss
+@mixin vcolor-cyan {
+  & {
+    --color-cyan-700: #00474d;
+    --color-cyan-500: #00959c;
+    --color-cyan-300: #53c1c7;
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    & {
+      --color-cyan-700: oklch(35% 0.09 200);
+      --color-cyan-500: oklch(60% 0.12 200);
+      --color-cyan-300: oklch(75% 0.10 200);
+    }
+  }
+}

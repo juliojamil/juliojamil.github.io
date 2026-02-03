@@ -1,0 +1,30 @@
+// v1-0-0/src/styles/_extends/_aligns.scss
+%box-sizing {
+  box-sizing: border-box;
+}
+
+%flex-col {
+  flex-direction: column;
+}
+%flex-row {
+  flex-direction: row;
+}
+%outline-0 {
+  outline: none;
+  outline-offset: 0
+}
+%margin-0 {
+  margin: 0;
+}
+%padding-0 {
+  padding: 0;
+}
+%border-0 {
+  border: 0;
+}
+%margin-auto {
+  margin: 0 auto !important;
+}
+%gap-0 {
+  gap: 0;
+}

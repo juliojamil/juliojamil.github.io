@@ -1,0 +1,20 @@
+// _root_variables/_colors/_blue.scss
+@mixin vcolor-blue {
+  & {
+    --color-blue-900: #001d3b;
+    --color-blue-700: #003760;
+    --color-blue-500: #0079bf;
+    --color-blue-300: #4fa8e1;
+    --color-blue-100: #c1e3fc;
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    & {
+      --color-blue-900: oklch(22% 0.08 240);
+      --color-blue-700: oklch(32% 0.10 240);
+      --color-blue-500: oklch(55% 0.15 240);
+      --color-blue-300: oklch(70% 0.12 240);
+      --color-blue-100: oklch(90% 0.05 240);
+    }
+  }
+}

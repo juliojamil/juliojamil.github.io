@@ -1,13 +1,14 @@
-.main-container {
+@mixin main_container {
   position: relative;
   flex-grow: 1;
   align-items: center;
   justify-content: center;
 
   .streams-icontainer {
-    display: inline-flex;
+    display: inherit;
     block-size: 100%;
     inline-size: 100%;
+
     max-inline-size: 50rem;
     max-block-size: 28.125rem;
     min-inline-size: 22rem;

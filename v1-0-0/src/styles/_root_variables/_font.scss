@@ -1,0 +1,12 @@
+//v1-0-0/src/styles/_root_variables/_font.scss
+@mixin vfont {
+  & {
+    --font-family: Inter, system-ui, sans-serif;
+    --font-size: 1rem;
+    --line-height: 1.5;
+    --font-weight: 400;
+    --font-style: normal;
+    --font-optical-sizing: auto;
+    --font-variation-settings: "wdth" 100;
+  }
+}

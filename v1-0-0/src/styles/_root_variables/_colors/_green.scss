@@ -1,0 +1,16 @@
+// _root_variables/_colors/_green.scss
+@mixin vcolor-green {
+  & {
+    --color-green-700: #235726;
+    --color-green-500: #409d44;
+    --color-green-300: #7bd27f;
+  }
+
+  @supports (color: oklch(0% 0 0)) {
+    & {
+      --color-green-700: oklch(0.408 0.096 144.602);
+      --color-green-500: oklch(0.62 0.154 144.154);
+      --color-green-300: oklch(0.788 0.143 145.052);
+    }
+  }
+}

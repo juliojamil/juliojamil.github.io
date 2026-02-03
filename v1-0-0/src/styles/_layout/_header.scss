@@ -1,78 +1,87 @@
-.header-container {
-  block-size: 3.5rem;
-  gap: 1.5ch;
-  //
-  align-items: center;
-  color: var(--text);
-  overflow: hidden;
-  background-color: var(--bg-color);
+@use "@styles/_extends/all";
+@forward "@styles/effects";
 
-  background-image: url("/assets/glass.png");
+%h-background-image {
   background-position: left top;
-  background-repeat: repeat-x;
   background-attachment: local;
-  background-size: 3rem 3rem;
+}
+%h-justify-center {
+  justify-content: center;
+}
+@mixin bg-image($repeat, $width, $height, $url){
+  @extend %h-background-image;
+  background-repeat: $repeat;
+  background-size: $width $height;
+  background-image: $url;
+}
 
-  section.logo-container {
-    display: inline-flex;
-    min-inline-size: 11.032rem;
+@mixin header_container {
+  @extend %h-justify-center;
+
+  @include bg-image(repeat-x, 3rem, 3rem, url("/assets/glass.png"));
+  overflow: hidden;
+  align-items: center;
+
+
+  :is(section.logo-container) {
+    @extend %display-inline-flex;
+    @include bg-image(no-repeat, 100%, 100%, url("/assets/name.png"));
     block-size: 3rem;
-
-    background-image: url("/assets/name.png");
-    background-position: left top;
-    background-repeat: no-repeat;
-    background-attachment: local;
-    background-size: 100% 100%;
-
-
+    min-inline-size: 11.032rem;
     &:hover {
       animation:fade-1 150ms ease-in-out;
       cursor: help;
     }
   }
-
-  nav.menu-container {
-    display: inline-flex;
-    flex-direction: row;
+  :is(nav.menu-container) {
+    display: none;
+    //@extend %display-inline-flex;
+    @extend %flex-row;
+    @extend %gap-0;
+    justify-content: inherit;
     align-items: start;
-    justify-content: center;
-    gap: 0;
   }
-
-  .btn-group {
-    display: inline-flex;
-    list-style: none!important;
-    flex-direction: row;
+  :is(ul.btn-group) {
+    @extend %display-inline-flex;
+    @extend %flex-row;
+    @extend %fit-height;
+    @extend %relative;
     flex-wrap: wrap;
+    list-style: none!important;
     min-inline-size: 100%;
-    block-size: fit-content;
     padding: 0.25rem;
     gap: 1rem;
-    position: relative;
     align-items: center;
+    justify-content: inherit;
 
-    li.btn-box {
-      display: inline-flex;
-      position: relative;
-      justify-content: center;
-      align-items: center;
-      inline-size: fit-content;
-      block-size: fit-content;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    line-height: 1;
+
+    :where(li.btn-box) {
+      @extend %fit-size;
+      @extend %gap-0;
+      padding: 0;
+      padding-right: 0.125rem!important;
+
+      display: inherit;
+      position: inherit;
+      align-items: inherit;
+      justify-content: inherit;
+
       background-color: var(--color7);
       border-width: 0.05rem;
       border-style: inset;
       border-color: var(--base);
-
       border-radius: 0.25ch;
-      gap: 0;
+
       cursor: pointer!important;
-      padding-right: 0.125rem!important;
-
-
 
       &::after {
-        display: block;
-        position: absolute;
+        @extend %display-block;
+        @extend %absolute;
         content: " ";
         top: -0.125rem;
         right: -0.125rem;
@@ -80,33 +89,24 @@
         border-radius: 50%;
         inline-size: 0.5rem;
         block-size: 0.5rem;
-        background-color: var(--color9) !important;
+        //background-color: var(--color9) !important;
       }
       &.active::after {
-        background-color: var(--color6) !important;
-      }
-
-      .btn-content {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding-inline: 2ch !important;
-        padding-block: 1ch !important;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.1rem;
-        text-transform: uppercase;
-        line-height: 1;
-        inline-size: fit-content;
-        block-size: fit-content;
-        pointer-events: none!important;
-        user-select: none;
+        //background-color: var(--color6) !important;
       }
     }
+    :where(.btn-content) {
+      @extend %fit-size;
+
+      display: inherit;
+      align-items: inherit;
+      justify-content: inherit;
+
+      padding-inline: 2ch !important;
+      padding-block: 1ch !important;
+
+      pointer-events: none!important;
+      user-select: none;
+    }
   }
-}
-@keyframes fade-1 {
-  0% {opacity: 1;}
-  50% {opacity: 0;}
-  100% {opacity: 1;}
 }

@@ -1,0 +1,26 @@
+// v1-0-0/src/styles/_extends/_sizes.scss
+%full-width {
+  inline-size: 100%;
+}
+
+%fit-width {
+  inline-size: fit-content;
+}
+
+%full-height {
+  block-size: 100%;
+}
+
+%fit-height {
+  block-size: fit-content;
+}
+
+%full-size {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+%fit-size {
+  inline-size: fit-content;
+  block-size: fit-content;
+}

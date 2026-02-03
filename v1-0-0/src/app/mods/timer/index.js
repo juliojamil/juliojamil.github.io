@@ -1,15 +1,15 @@
 "use strict";
 
-const TimerStore = new Array(1);
-TimerStore[0] = {test: 1};
-Object.freeze(TimerStore);
-
 const modState = {
     running: false,
     stopped: false,
     interval: 5000,
-    queue: undefined
+    queue: undefined,
+    next: 0
 };
+const TIMER_SIZE = 10;
+const TimerStore = new Array(TIMER_SIZE).fill(null);
+Object.seal(TimerStore);
 
 const state_running_contract = () => {
     const {stopped, running} = modState;
@@ -25,13 +25,18 @@ const activeinterface = Object.create(null);
 activeinterface.timer_run = () => {
     if(state_stopped_contract() || !modState.queue) return;
     const len = TimerStore.length;
+    const now = Date.now();
     for(let i = (len - 1); i >=0; i--) {
         const item = TimerStore[i];
-        if(item) console.log(item);
+        if(item && now >= item.timeout) {
+            try {
+                item.callback();
+            } catch {}
+            TimerStore[i] = null;
+        }
     }
     activeinterface.timer_renew();
 };
-
 activeinterface.timer_renew = () => {
     if(state_stopped_contract()) return;
     if(modState.queue) {
@@ -53,6 +58,24 @@ modinterface.stop_request = () => {
     if(state_stopped_contract()) return;
     modState.running = false;
     modState.stopped = true;
+    TimerStore.fill(null);
+};
+modinterface.add_request = (context = {}) => {
+    try {
+        const {next, callback} = context;
+        const index = modState.next;
+        TimerStore[index] = {
+            timeout: (Date.now() + next),
+            callback
+        };
+        if(modState.next >= TIMER_SIZE) {
+            modState.next = 0;
+            return;
+        }
+        modState.next = (index + 1);
+    } catch (err) {
+        console.error(err.message);
+    }
 };
 Object.freeze(modinterface);
 

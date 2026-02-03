@@ -30,7 +30,7 @@ const start_request = (_) => {
     store.element.attach("footer.canvas", footer(container));
 
     Content.start_request({Components});
-    //Components.timer.start_request();
+    Components.timer.start_request();
 };
 const stop_request = (_) => {
     const {timer} = Components;

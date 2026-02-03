@@ -1,32 +1,11 @@
 "use strict";
 
 const modState = {
-    worldTimeApi: "https://worldtimeapi.org/api/timezone/America/Belem",
-    cloudflare: "https://one.one.one.one/cdn-cgi/trace"
+    cloudflare: "https://one.one.one.one/cdn-cgi/trace",
+    try: false
 };
-Object.freeze(modState);
+Object.seal(modState);
 
-const getDateFromWorldTimeApi = () => {
-    const url = modState.worldTimeApi;
-    return fetch(url)
-        .then(res => {
-            if(!res.ok) return undefined;
-            return res.json()
-                .then(obj => {
-                    const {utc_datetime} = obj;
-                    if(!utc_datetime) return undefined;
-                    return new Date(utc_datetime).getFullYear();
-                })
-                .catch(err => {
-                    if(err) console.error(err.message);
-                    return undefined;
-                });
-        })
-        .catch(err => {
-            if(err) console.error(err.message);
-            return undefined;
-        });
-};
 const getDateFromCloudflare = () => {
     const url = modState.cloudflare;
     return fetch(url)
@@ -54,20 +33,36 @@ const getDateFromCloudflare = () => {
         });
 };
 
-const modInterface = Object.create(null);
-modInterface.copyright = (callback) => {
+const update_copryright = (callback) => {
     let copyrightYear = "2025";
-    getDateFromCloudflare().then(currentYear => {
-        if(currentYear) {
-            copyrightYear = `2025-${currentYear}`;
-        }
-        const content = `\u00A9 ${copyrightYear}, Jamil Services.`;
-        callback(content);
-    }).catch(err => {
-        if(err) console.error(err.message);
-        const content = `\u00A9 ${copyrightYear}, Jamil Services.`;
-        callback(content);
-    });
+    const content = () => `\u00A9 ${copyrightYear}, Jamil Services.`;
+    try {
+        modState.try = false;
+        getDateFromCloudflare()
+            .then(currentYear => {
+            if (currentYear) copyrightYear = `2025-${currentYear}`;
+            callback(content());
+        });
+    } catch (err) {
+        callback(content());
+        throw new Error(err.message);
+    }
+};
+
+const modInterface = Object.create(null);
+modInterface.copyright = (callback, timer) => {
+    try {
+        update_copryright(callback);
+    } catch (err) {
+        if(modState.try) return;
+        modState.try = true;
+        timer.add_request({
+            next: 2000,
+            callback: () => {
+                update_copryright(callback);
+            }
+        });
+    }
 };
 Object.freeze(modInterface);
 

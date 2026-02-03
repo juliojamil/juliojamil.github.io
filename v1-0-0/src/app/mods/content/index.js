@@ -28,6 +28,8 @@ const footerContent = (copyright) => {
     const article = Components.container.element.article();
     article.innerText = copyright;
     const parent = Components.container.store.element.recover("footer.canvas");
+    const child = parent.firstChild;
+    if(child) parent.removeChild(child);
     parent.appendChild(article);
 };
 
@@ -37,7 +39,7 @@ modInterface.start_request = (context = {}) => {
     Components = context.Components;
     headerContent();
     mainContent();
-    CopyRightContent(footerContent);
+    CopyRightContent(footerContent, Components.timer);
 };
 Object.freeze(modInterface);
 

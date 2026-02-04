@@ -13,6 +13,8 @@
     @extend %fit-size;
 
     :is(article.welcome) {
+      @include p.home_welcome;
+
       :is(h2) {
         @include p.home_h2;
       }
@@ -20,7 +22,6 @@
         @include p.home_h4;
       }
       :is(ul.streams-list) {
-        @include p.home_list_streams;
         @include p.home_list;
       }
     }

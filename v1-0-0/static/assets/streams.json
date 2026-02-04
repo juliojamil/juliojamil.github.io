@@ -1,0 +1,19 @@
+{
+  "items": {
+    "twitch": {
+      "name": "twitch",
+      "link": "https://www.twitch.tv/juliojamil",
+      "desc": "desenvolvimento web e desktop, e casualmente fa\u00E7o algumas gameplays."
+    },
+    "trovo": {
+      "name": "trovo",
+      "link": "https://trovo.live/juliojamil",
+      "desc": "minigame da trovo com intera\u00E7\u00E3o entre contas, com gameplay de desktop game, e casualmente vetoriza\u00E7\u00E3o de imagens."
+    },
+    "kick": {
+      "name": "kick",
+      "link": "https://kick.com/juliojamil",
+      "desc": "ainda n\u00E3o est\u00E1 definido ent\u00E3o fa\u00E7o lives diversas casualmente."
+    }
+  }
+}

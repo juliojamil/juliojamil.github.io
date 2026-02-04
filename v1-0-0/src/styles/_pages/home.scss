@@ -38,16 +38,16 @@ $kick_color: #00e701;
     border: 0.08rem #70a0de solid;
     border-right-color: transparent;
     border-block-color: transparent;
-    block-size: 5rem;
-
+    min-block-size: 3.625rem;
+    max-block-size: fit-content;
   }
 }
 
 @mixin home_h2 {
-  font-size: 1.85rem;
+  font-size: clamp(1.25rem, 1.85rem, 2.78rem);
 }
 @mixin home_h4 {
-  font-size: 1.5rem;
+  font-size: clamp(1.15rem, 1.5rem, 2.75rem);
 }
 
 @mixin home_welcome {
@@ -83,7 +83,7 @@ $kick_color: #00e701;
     @extend %display-inline-flex;
     @extend %flex-col;
 
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
   :where(li) {
     @extend %display-inline-flex;
@@ -96,17 +96,17 @@ $kick_color: #00e701;
   }
   :where(a) {
     &, &:active, &:hover, &:visited, &:focus {
+      @extend %fit-size;
+      display: inherit;
+
       text-decoration: none !important;
       color: inherit;
-      inline-size: fit-content;
-      block-size: fit-content;
       background-color: transparent;
       padding: 0 !important;
       outline: none !important;
       offset: none !important;
       margin: 0 !important;
       border: 0 !important;
-      display: inherit;
     }
   }
 }

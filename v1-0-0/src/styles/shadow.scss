@@ -24,4 +24,6 @@
   flex-direction: column;
   gap: 0;
   inset: 0;
+  padding-inline: .75rem !important;
+  min-inline-size: 20rem;
 }

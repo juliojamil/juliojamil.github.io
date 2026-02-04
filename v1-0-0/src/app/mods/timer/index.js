@@ -5,7 +5,8 @@ const modState = {
     stopped: false,
     interval: 5000,
     queue: undefined,
-    next: 0
+    next: 0,
+    created: 0
 };
 const TIMER_SIZE = 10;
 const TimerStore = new Array(TIMER_SIZE).fill(null);
@@ -33,6 +34,7 @@ activeinterface.timer_run = () => {
                 item.callback();
             } catch {}
             TimerStore[i] = null;
+            modState.created = (modState.created -1);
         }
     }
     activeinterface.timer_renew();
@@ -63,19 +65,35 @@ modinterface.stop_request = () => {
 modinterface.add_request = (context = {}) => {
     try {
         const {next, callback} = context;
+
+        const created = modState.created;
+        if(TIMER_SIZE >= created) {
+            console.error("TimerStore Error: Datamemory Fully");
+            return false;
+        }
+
         const index = modState.next;
+        if(TimerStore[index]) {
+            console.error("TimerStore Error: Slot busy");
+            return false;
+        }
+
         TimerStore[index] = {
             timeout: (Date.now() + next),
             callback
         };
+        modState.created = (created +1);
         if(modState.next >= TIMER_SIZE) {
             modState.next = 0;
             return;
         }
         modState.next = (index + 1);
+
+        return true;
     } catch (err) {
         console.error(err.message);
     }
+    return false;
 };
 Object.freeze(modinterface);
 

@@ -1,0 +1,112 @@
+@use "@styles/_extends/all";
+
+$twitch_color: #9146FF;
+$trovo_color: #3cdb7d;
+$kick_color: #00e701;
+
+%home_align_center {
+  align-items: center;
+}
+%home_text_upper {
+  text-transform: uppercase;
+}
+
+@mixin home_stream_colors {
+  &.twitch {
+    color: $twitch_color;
+  }
+  &.trovo {
+    color: $trovo_color;
+  }
+  &.kick {
+    color: $kick_color;
+  }
+}
+@mixin home_stream_desc {
+  &.stream-desc {
+    @extend %display-inline-flex;
+    @extend %home_align_center;
+    @extend %home_text_upper;
+
+    font-size: 0.850rem;
+    line-height: 1rem;
+
+    padding-inline-end: 0.15rem !important;
+    padding-inline-start: 0.5rem !important;
+    padding-block: 0.25rem !important;
+
+    border: 0.08rem #70a0de solid;
+    border-right-color: transparent;
+    border-block-color: transparent;
+    block-size: 5rem;
+
+  }
+}
+
+@mixin home_h2 {
+  font-size: 1.85rem;
+}
+@mixin home_h4 {
+  font-size: 1.5rem;
+}
+
+@mixin home_welcome {
+  @extend %display-flex;
+  @extend %flex-col;
+  @extend %home_align_center;
+
+  gap: 1.5rem;
+}
+
+@mixin home_list_streams {
+  & {
+    pointer-events: none;
+  }
+  &.stream-source {
+    @extend %display-inline-flex;
+    @extend %fit-height;
+    @extend %home_text_upper;
+
+    font-size: 1.250rem;
+    font-weight: 600;
+
+    inline-size: 6rem;
+    justify-content: center;
+  }
+
+  @include home_stream_colors;
+  @include home_stream_desc;
+}
+
+@mixin home_list {
+  & {
+    @extend %display-inline-flex;
+    @extend %flex-col;
+
+    gap: 0.5rem;
+  }
+  :where(li) {
+    @extend %display-inline-flex;
+    @extend %flex-row;
+    @extend %home_align_center;
+    gap: 1rem;
+    span {
+      @include home_list_streams;
+    }
+  }
+  :where(a) {
+    &, &:active, &:hover, &:visited, &:focus {
+      text-decoration: none !important;
+      color: inherit;
+      inline-size: fit-content;
+      block-size: fit-content;
+      background-color: transparent;
+      padding: 0 !important;
+      outline: none !important;
+      offset: none !important;
+      margin: 0 !important;
+      border: 0 !important;
+      display: inherit;
+    }
+  }
+}

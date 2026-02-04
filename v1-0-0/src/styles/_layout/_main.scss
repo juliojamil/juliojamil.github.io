@@ -1,17 +1,33 @@
+@use "@styles/_extends/all";
+@use "@styles/_pages/all" as p;
+
 @mixin main_container {
-  position: relative;
+  @extend %relative;
   flex-grow: 1;
+
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 
-  .streams-icontainer {
+  .streams-container {
     display: inherit;
-    block-size: 100%;
-    inline-size: 100%;
+    @extend %fit-size;
 
-    max-inline-size: 50rem;
+    :is(article.welcome) {
+      :is(h2) {
+        @include p.home_h2;
+      }
+      :is(h4) {
+        @include p.home_h4;
+      }
+      :is(ul.streams-list) {
+        @include p.home_list_streams;
+        @include p.home_list;
+      }
+    }
+
+    /*max-inline-size: 50rem;
     max-block-size: 28.125rem;
     min-inline-size: 22rem;
-    min-block-size: 25rem;
+    min-block-size: 25rem;*/
   }
 }

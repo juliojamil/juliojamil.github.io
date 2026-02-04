@@ -13,6 +13,7 @@
     @extend %fit-size;
 
     :is(article.welcome) {
+      padding-top: 2rem;
       @include p.home_welcome;
 
       :is(h2) {
@@ -25,10 +26,5 @@
         @include p.home_list;
       }
     }
-
-    /*max-inline-size: 50rem;
-    max-block-size: 28.125rem;
-    min-inline-size: 22rem;
-    min-block-size: 25rem;*/
   }
 }

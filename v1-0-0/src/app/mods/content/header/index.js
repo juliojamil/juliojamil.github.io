@@ -14,7 +14,7 @@ modInterface.content = (container) => {
     if(!nav || !logo) return undefined;
 
     frag.appendChild(logo);
-    frag.appendChild(nav);
+    //frag.appendChild(nav);
 
     return frag;
 };

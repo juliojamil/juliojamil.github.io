@@ -83,13 +83,6 @@ modInterface.content = (container) => {
     const section = container.element.listUl();
     section.setAttribute("class", "streams-list");
 
-    /*const twitch_line = line_build(container, "twitch");
-    const trovo_line = line_build(container, "trovo");
-    const kick_line = line_build(container, "kick");
-
-    if(twitch_line) section.appendChild(twitch_line);
-    if(trovo_line) section.appendChild(trovo_line);
-    if(kick_line) section.appendChild(kick_line);*/
     if(!modState.items) get_streams({container, section});
     return section;
 };
